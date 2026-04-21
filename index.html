@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yazılım Arşivi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="top-nav">
+    <div class="nav-left">
+        <a href="#about">Hakkımda</a>
+        <a href="#projects">Teknik Laboratuvar</a>
+        <a href="#contact">İletişim Merkezi</a>
+        
+    </div>
+
+    <div class="nav-right">
+        <button id="darkModeToggle" class="dark-btn">🌙</button>
+    </div>
+</nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-content">
+    <button id="darkModeToggle" class="dark-btn">🌙</button>
+            <h1 class="glow-text">Merhaba, Ben <span class="name">Taha Özdemir</span></h1>
+            <p class="subtitle">GELECEĞİ KODLAYAN YAZILIM GELİŞTİRİCİ</p>
+            <div class="cta-buttons">
+                <a href="#projects" class="btn-primary">Kod Arşivini Keşfet</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="projects-section">
+        <section id="about" class="about-section">
+    <h2 class="section-title">Hakkımda <span class="blue-light">Ben Kimim?</span></h2>
+
+    <div class="about-container">
+        <div class="about-text">
+            <p>
+                Merhaba, ben <strong>Taha Özdemir</strong>. Yazılım geliştirme alanında kendimi sürekli geliştiren
+                bir geliştiriciyim. Python, C# ve web teknolojileri üzerine projeler geliştiriyorum.
+            </p>
+
+            <p>
+                Amacım; gerçek dünya problemlerine çözümler üreten, performanslı ve güvenli yazılımlar geliştirmek.
+                Backend sistemler, otomasyon araçları ve veri işleme konularına özel ilgi duyuyorum.
+            </p>
+
+            <p>
+                Öğrenmeye, üretmeye ve kendimi geliştirmeye devam ediyorum.
+            </p>
+        </div>
+
+        <div class="about-skills">
+    <h3>Teknolojiler</h3>
+
+    <div class="skill">
+        <span>Python</span>
+        <div class="bar"><div class="fill python"></div></div>
+    </div>
+
+    <div class="skill">
+        <span>C#</span>
+        <div class="bar"><div class="fill csharp"></div></div>
+    </div>
+
+    <div class="skill">
+        <span>HTML / CSS</span>
+        <div class="bar"><div class="fill web"></div></div>
+    </div>
+
+    <div class="skill">
+        <span>SQL</span>
+        <div class="bar"><div class="fill sql"></div></div>
+    </div>
+
+    <div class="skill">
+        <span>API / Backend</span>
+        <div class="bar"><div class="fill api"></div></div>
+    </div>
+</div>
+    </div>
+</section>
+    <div class="scrolling-bar">
+   <div class="scrolling-content">
+    PYTHON • CSS • C# • PHP • JAVASCRIPT • İLETİŞİM MERKEZİ •
+</div>
+</div>
+        <h2 class="section-title">Teknik <span class="blue-light">Laboratuvar</span></h2>
+        
+        <div class="filter-wrapper">
+            <button class="filter-btn active" onclick="filterProjects('all')">Tümü</button>
+            <button class="filter-btn" onclick="filterProjects('python')">Python</button>
+            <button class="filter-btn" onclick="filterProjects('csharp')">C#</button>
+            <button class="filter-btn" onclick="filterProjects('php')">PHP</button>
+        </div>
+
+        <div class="projects-grid" id="projectGrid">
+            
+            <div class="project-card python">
+                <div class="card-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span><span class="lang-label">password_gen.py</span></div>
+                <h3>Gelişmiş Şifre Yöneticisi</h3>
+                <p>Güvenlik analizi yapan ve karmaşık karakter setleri kullanan script.</p>
+                <details>
+                    <summary>Kodu İncele</summary>
+                    <div class="code-container"><pre><code>import random
+import string
+
+def create_secure_pw(length=16, use_special=True):
+    pool = string.ascii_letters + string.digits
+    if use_special:
+        pool += "!@#$%^&*()_+-="
+    
+    password = "".join(random.choice(pool) for _ in range(length))
+    
+    # Güvenlik Kontrolü
+    has_upper = any(c.isupper() for c in password)
+    has_lower = any(c.islower() for c in password)
+    has_digit = any(c.isdigit() for c in password)
+    
+    score = sum([has_upper, has_lower, has_digit])
+    status = "Güçlü" if score == 3 and length >= 12 else "Zayıf"
+    
+    return f"Şifre: {password} | Durum: {status}"
+
+print(create_secure_pw(20))</code></pre></div>
+                </details>
+            </div>
+
+            <div class="project-card python">
+                <div class="card-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span><span class="lang-label">weather_app.py</span></div>
+                <h3>Hava Durumu Çekici</h3>
+                <p>Dış kaynaklı API kullanarak anlık hava durumu verisi işleme.</p>
+                <details><summary>Kodu İncele</summary><div class="code-container"><pre><code>import requests
+
+def get_weather(city):
+    api_key = "YOUR_API_KEY"
+    url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric"
+    
+    response = requests.get(url)
+    if response.status_code == 200:
+        data = response.json()
+        temp = data['main']['temp']
+        desc = data['weather'][0]['description']
+        return f"{city} için Sıcaklık: {temp}°C | Durum: {desc}"
+    return "Şehir bulunamadı."
+
+print(get_weather("Ankara"))</code></pre></div></details>
+            </div>
+
+            <div class="project-card python">
+                <div class="card-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span><span class="lang-label">file_sorter.py</span></div>
+                <h3>Otomatik Dosya Düzenleyici</h3>
+                <p>İndirilenler klasörünü uzantılara göre klasörleyen otomasyon.</p>
+                <details><summary>Kodu İncele</summary><div class="code-container"><pre><code>import os
+import shutil
+
+def organize_files(path):
+    for filename in os.listdir(path):
+        name, ext = os.path.splitext(filename)
+        ext = ext[1:].lower()
+        if ext == "": continue
+        
+        if not os.path.exists(path + "/" + ext):
+            os.makedirs(path + "/" + ext)
+        shutil.move(path+"/"+filename, path+"/"+ext+"/"+filename)
+
+# organize_files("/Downloads")</code></pre></div></details>
+            </div>
+
+            <div class="project-card python">
+                <div class="card-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span><span class="lang-label">database_lite.py</span></div>
+                <h3>SQLite Kayıt Sistemi</h3>
+                <p>Yerel veritabanı üzerinde CRUD (Ekle, Oku, Güncelle, Sil) işlemleri.</p>
+                <details><summary>Kodu İncele</summary><div class="code-container"><pre><code>import sqlite3
+
+db = sqlite3.connect("users.db")
+cursor = db.cursor()
+
+cursor.execute("CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, name TEXT)")
+
+def add_user(name):
+    cursor.execute("INSERT INTO users (name) VALUES (?)", (name,))
+    db.commit()
+
+add_user("Ahmet")
+db.close()</code></pre></div></details>
+            </div>
+
+            <div class="project-card python">
+                <div class="card-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span><span class="lang-label">scraper.py</span></div>
+                <h3>Web Veri Kazıyıcı</h3>
+                <p>BeautifulSoup ile internet sitelerinden başlık ve link çekme.</p>
+                <details><summary>Kodu İncele</summary><div class="code-container"><pre><code>from bs4 import BeautifulSoup
+import requests
+
+def scrape_titles(url):
+    html = requests.get(url).content
+    soup = BeautifulSoup(html, "html.parser")
+    for title in soup.find_all("h2"):
+        print(title.text.strip())
+
+# scrape_titles("https://blogsite.com")</code></pre></div></details>
+            </div>
+
+            <div class="project-card csharp">
+                <div class="card-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span><span class="lang-label">BankSystem.cs</span></div>
+                <h3>OOP Banka Simülasyonu</h3>
+                <p>Class yapısı ile bakiye kontrolü ve para transferi mantığı.</p>
+                <details><summary>Kodu İncele</summary><div class="code-container"><pre><code>public class Account {
+    public decimal Balance { get; set; }
+    public void Deposit(decimal amount) {
+        if(amount > 0) Balance += amount;
+    }
+    public bool Withdraw(decimal amount) {
+        if(amount <= Balance) {
+            Balance -= amount;
+            return true;
+        }
+        return false;
+    }
+}</code></pre></div></details>
+            </div>
+
+            <div class="project-card csharp">
+                <div class="card-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span><span class="lang-label">JsonHandler.cs</span></div>
+                <h3>JSON Veri İşleme</h3>
+                <p>Nesneleri JSON formatına çevirme ve geri okuma (Serialization).</p>
+                <details><summary>Kodu İncele</summary><div class="code-container"><pre><code>using Newtonsoft.Json;
+
+public class User {
+    public string Name { get; set; }
+    public string Email { get; set; }
+}
+
+string json = JsonConvert.SerializeObject(new User { Name="Ali", Email="ali@mail.com" });
+User user = JsonConvert.DeserializeObject&lt;User&gt;(json);</code></pre></div></details>
+            </div>
+
+            <div class="project-card csharp">
+                <div class="card-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span><span class="lang-label">MultiThread.cs</span></div>
+                <h3>Asenkron Görev Yönetimi</h3>
+                <p>Task ve Await kullanarak arayüzü dondurmadan işlem yapma.</p>
+                <details><summary>Kodu İncele</summary><div class="code-container"><pre><code>public async Task ProcessData() {
+    Console.WriteLine("İşlem başladı...");
+    await Task.Delay(3000); // 3 saniye bekle
+    Console.WriteLine("Veri işlendi!");
+}</code></pre></div></details>
+            </div>
+
+            <div class="project-card csharp">
+                <div class="card-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span><span class="lang-label">LinqQuery.cs</span></div>
+                <h3>LINQ Veri Filtreleme</h3>
+                <p>Liste içerisindeki verileri SQL benzeri sorgularla süzme.</p>
+                <details><summary>Kodu İncele</summary><div class="code-container"><pre><code>var numbers = new List&lt;int&gt; { 1, 5, 8, 12, 15, 20 };
+var result = numbers.Where(n => n > 10).OrderBy(n => n).ToList();
+
+foreach(var n in result) Console.WriteLine(n);</code></pre></div></details>
+            </div>
+
+            <div class="project-card csharp">
+                <div class="card-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span><span class="lang-label">Interface.cs</span></div>
+                <h3>Ödeme Sistemi Interface</h3>
+                <p>Farklı ödeme türlerini tek bir çatı altında toplama.</p>
+                <details><summary>Kodu İncele</summary><div class="code-container"><pre><code>interface IPayment { void Pay(decimal amount); }
+
+class CreditCard : IPayment {
+    public void Pay(decimal amount) => Console.WriteLine(amount + " TL Kredi Kartı");
+}
+
+class Crypto : IPayment {
+    public void Pay(decimal amount) => Console.WriteLine(amount + " TL Kripto");
+}</code></pre></div></details>
+            </div>
+
+            <div class="project-card php">
+                <div class="card-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span><span class="lang-label">db.php</span></div>
+                <h3>PDO Veritabanı Sınıfı</h3>
+                <p>Gelişmiş ve güvenli veritabanı bağlantı yönetimi.</p>
+                <details><summary>Kodu İncele</summary><div class="code-container"><pre><code>class Database {
+    private $dsn = "mysql:host=localhost;dbname=test";
+    private $user = "root";
+    public $conn;
+
+    public function __construct() {
+        try {
+            $this->conn = new PDO($this->dsn, $this->user, "");
+        } catch(PDOException $e) {
+            die("Hata: " . $e->getMessage());
+        }
+    }
+}</code></pre></div></details>
+            </div>
+
+            <div class="project-card php">
+                <div class="card-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span><span class="lang-label">auth.php</span></div>
+                <h3>Oturum (Session) Sistemi</h3>
+                <p>Kullanıcı girişi, çıkışı ve sayfa yetkilendirme kontrolü.</p>
+                <details><summary>Kodu İncele</summary><div class="code-container"><pre><code>session_start();
+
+function login($user, $pass) {
+    if($user == "admin" && $pass == "123") {
+        $_SESSION['auth'] = true;
+        return true;
+    }
+    return false;
+}
+
+if(!isset($_SESSION['auth'])) die("Erişim Yasak!");</code></pre></div></details>
+            </div>
+
+            <div class="project-card php">
+                <div class="card-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span><span class="lang-label">check.php</span></div>
+                <h3>Form Doğrulama Motoru</h3>
+                <p>Boş veri, e-posta formatı ve güvenlik filtreleme işlemleri.</p>
+                <details><summary>Kodu İncele</summary><div class="code-container"><pre><code>if($_POST) {
+    $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+    if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        echo "Geçersiz e-posta.";
+    } else {
+        echo "Başarılı!";
+    }
+}</code></pre></div></details>
+            </div>
+
+            <div class="project-card php">
+                <div class="card-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span><span class="lang-label">upload.php</span></div>
+                <h3>Güvenli Dosya Yükleme</h3>
+                <p>Sadece belirli uzantıdaki resimleri sunucuya yükleme işlemi.</p>
+                <details><summary>Kodu İncele</summary><div class="code-container"><pre><code>$target = "uploads/" . basename($_FILES["file"]["name"]);
+$type = strtolower(pathinfo($target, PATHINFO_EXTENSION));
+
+if($type == "jpg" || $type == "png") {
+    move_uploaded_file($_FILES["file"]["tmp_name"], $target);
+    echo "Yüklendi.";
+}</code></pre></div></details>
+            </div>
+
+            <div class="project-card php">
+                <div class="card-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span><span class="lang-label">api.php</span></div>
+                <h3>JSON API Çıktısı Üretme</h3>
+                <p>Veritabanı sonuçlarını JSON formatında dışarıya sunma.</p>
+                <details><summary>Kodu İncele</summary><div class="code-container"><pre><code>header('Content-Type: application/json');
+$data = ["status" => "success", "user" => "Ahmet"];
+echo json_encode($data);</code></pre></div></details>
+            </div>
+
+        </div>
+    </section>
+
+    <footer id="contact" class="footer">
+        <h2 class="section-title">İletişim <span class="blue-light">Merkezi</span></h2>
+        <div class="contact-grid">
+            <a href="mailto:adiniz@gmail.com" class="contact-item">
+                <div class="icon">📧</div>
+                <div class="info"><span>E-Posta</span><p>tahayilmaz2008@gmail.com</p> <p>tahafatem06@gmail.com</p></div>
+            </a>
+            <a href="tel:+905000000000" class="contact-item">
+                <div class="icon">📱</div>
+                <div class="info"><span>Telefon</span><p>+90 (535) 814 9208</p></div>
+            </a>
+            <a href="https://github.com" class="contact-item">
+                <div class="icon">🐙</div>
+                <div class="info"><span>GitHub</span><p>github.com/tahayilmaz1905</p></div>
+            </a>
+        </div>
+        <p class="copyright">Designed by [Taha Özdemir] - 12. Sınıf Portfolyosu</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
